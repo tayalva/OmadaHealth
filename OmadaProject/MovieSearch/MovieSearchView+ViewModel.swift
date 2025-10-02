@@ -9,7 +9,11 @@ import os
 import Foundation
 import SwiftUI
 
+/// Extension to `MovieSearchView` that contains the `ViewModel` class.
+/// This ViewModel handles the business logic for searching movies and managing navigation state.
 extension MovieSearchView {
+    /// ViewModel for `MovieSearchView` responsible for managing movie search results,
+    /// performing searches via the API service, and handling navigation to detail views.
     @Observable
     class ViewModel {
         var service: ApiClient

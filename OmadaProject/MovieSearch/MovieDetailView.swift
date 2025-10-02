@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// A view that displays detailed information about a given movie.
+/// It shows the movie's title, release year, poster image, rating, and an overview section.
+/// Use this view to present comprehensive details of a selected movie.
 struct MovieDetailView: View {
     var movie: Movie
     

@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Handles API endpoints for movies, search, and related resources in The Movie Database (TMDb) API.
+/// Provides cases and functionality to construct URLs for various endpoints such as searching movies, collections, companies, keywords, multi, people, and TV shows.
 enum MovieAPI {
     static let baseURL = "https://api.themoviedb.org/3"
     static let imageBaseURL = "https://image.tmdb.org/t/p/original"
@@ -15,6 +17,8 @@ enum MovieAPI {
     case search(SearchCategory)
 }
 
+/// Represents different search categories for TMDb API.
+/// Each case includes the search query and supports pagination through the `page` parameter.
 enum SearchCategory {
     case movie(query: String, page: Int = 1)
     case collection(String, page: Int = 1)
@@ -24,6 +28,7 @@ enum SearchCategory {
     case person(String, page: Int = 1)
     case tv(String, page: Int = 1)
 
+    /// Returns the endpoint string for the search category (e.g., "movie", "collection").
     var endpoint: String {
         switch self {
         case .movie: return "movie"
@@ -36,6 +41,7 @@ enum SearchCategory {
         }
     }
 
+    /// Returns the search query string associated with the category.
     var query: String {
         switch self {
         case let .movie(query, _),
@@ -49,6 +55,7 @@ enum SearchCategory {
         }
     }
 
+    /// Returns the page number for paginated search results.
     var page: Int {
         switch self {
         case let .movie(_, page),
@@ -64,6 +71,8 @@ enum SearchCategory {
 }
 
 extension MovieAPI {
+    /// Returns the relative path string for the API request, including query parameters such as API key, language, and pagination.
+    /// Returns `nil` if the path cannot be constructed (e.g., due to encoding issues or unsupported cases).
     var path: String? {
         let apiKeyParam = "?api_key=\(MovieAPI.apiKey)"
         let languageParam = "&language=en-US"
@@ -90,6 +99,8 @@ extension MovieAPI {
         }
     }
     
+    /// Returns the complete URL for the API request by combining the base URL with the constructed path.
+    /// Returns `nil` if the path is invalid or cannot be constructed.
     var url: URL? {
         guard let path else { return nil }
         return URL(string: MovieAPI.baseURL + path)

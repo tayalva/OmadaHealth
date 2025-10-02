@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// A view that provides a search interface for movies.
+/// Users can enter a search query to find movies, view the results in a scrollable list,
+/// and navigate to detailed views of selected movies.
 struct MovieSearchView: View {
     @State var viewModel: ViewModel = ViewModel()
     @State var searchText: String = ""

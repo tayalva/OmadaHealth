@@ -7,14 +7,27 @@
 
 import Foundation
 
-// A protocol that allows for mocking of URLSession. Any other
-// needed functions from URLSession should be added here.
+/// A protocol that allows for mocking of URLSession. Any other
+/// needed functions from URLSession should be added here.
+/// This enables dependency injection for network requests,
+/// facilitating easier testing by substituting real network calls with mocks.
 protocol NetworkSession {
     func data(from: URL) async throws -> (Data, URLResponse)
 }
 
 extension URLSession: NetworkSession {}
 
+/// A mock implementation of `NetworkSession` used to simulate network requests for testing purposes.
+/// 
+/// Properties:
+/// - `mockData`: The mock data to be returned when a network request is made.
+/// - `mockResponse`: The mock URL response to accompany the mock data.
+/// - `mockError`: An optional error to be thrown to simulate network failures.
+/// 
+/// Methods:
+/// - `data(from:)`: Returns the mock data and response, or throws the mock error if set.
+/// - `setMockResponse(_:)`: Sets the mock HTTP response to simulate different server status codes.
+/// - `setMockData(isValid:)`: Sets mock data to either a valid or invalid JSON payload for testing decoding logic.
 class MockURLSession: NetworkSession {
     var mockData: Data?
     var mockResponse: URLResponse?
@@ -30,11 +43,13 @@ class MockURLSession: NetworkSession {
         return (data, response)
     }
     
+    /// Enum representing common HTTP response status codes for mocking purposes.
     enum HTTPResponse: Int {
         case success = 200
         case notFound = 404
         case serverError = 500
         
+        /// Creates an `HTTPURLResponse` with the corresponding status code and a fixed URL.
         var urlResponse: HTTPURLResponse? {
             HTTPURLResponse(
                 url: URL(string: "https://google.com")!,
@@ -45,11 +60,14 @@ class MockURLSession: NetworkSession {
         }
     }
     
+    /// Sets the mock HTTP response to simulate different server response scenarios.
+    /// - Parameter response: The `HTTPResponse` enum case representing the desired status code.
     func setMockResponse(_ response: HTTPResponse) {
         mockResponse = response.urlResponse
     }
     
-    // Mock data that is valid or invalid for testing.
+    /// Sets the mock data to either valid or invalid JSON for testing decoding and error handling.
+    /// - Parameter isValid: A Boolean indicating whether to use valid JSON (`true`) or invalid JSON (`false`).
     func setMockData(isValid: Bool) {
         let validJson = """
 {

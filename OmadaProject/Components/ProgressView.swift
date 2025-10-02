@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/// A visual progress bar representing a rating value out of 10.
+///
+/// The `ProgressView` displays a horizontal bar that fills proportionally
+/// to the provided `rating`. Useful for visually indicating a score or rating
+/// in a compact, animated style.
 struct ProgressView: View {
     var rating: Double
     @State private var fillWidth: CGFloat = 0

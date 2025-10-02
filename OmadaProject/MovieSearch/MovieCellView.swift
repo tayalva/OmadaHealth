@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// A view that displays a movie's basic information including its title, release year, image, and viewer rating.
+/// This view is designed to be used within lists or collections to present a summary of a movie.
+/// It supports displaying an optional image from a URL, formatted release year, and a rating with a progress view.
 struct MovieCellView: View {
     var title: String = "Movie Title"
     var year: DateStyle?

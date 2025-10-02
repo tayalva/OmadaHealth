@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A helper enum for formatting dates either as a year or a full long-style date.
 enum DateStyle {
     case year(Date?)
     case full(Date?)

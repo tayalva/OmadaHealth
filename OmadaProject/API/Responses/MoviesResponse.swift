@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Represents the server response for a movie search, including pagination information
+/// and a list of `ServerMovie` objects.
 struct MoviesResponse: Codable {
     let page: Int
     let results: [ServerMovie]
@@ -21,6 +23,11 @@ struct MoviesResponse: Codable {
     }
 }
 
+/// Represents the raw movie object returned from the server.
+///
+/// This struct is used to decode the movie data as received from the API before converting
+/// it into the app's `Movie` model. It contains properties such as IDs, titles, language,
+/// overview, release date, genres, image paths, popularity, and rating details.
 struct ServerMovie: Codable, Identifiable {
     let id: Int
     let title: String

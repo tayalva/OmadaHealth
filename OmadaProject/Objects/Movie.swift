@@ -7,6 +7,24 @@
 
 import Foundation
 
+/// The main app movie object representing a movie in the OmadaProject.
+///
+/// This struct encapsulates all relevant movie data used throughout the app, such as title, language, overview, release date, genre IDs, image URLs, popularity, voting statistics, and flags for video and adult content.
+///
+/// Movies received from the server as `ServerMovie` are converted into this type for use in the app.
+///
+/// - Properties:
+///   - `id`: Unique identifier for the movie.
+///   - `title`: The movie's title.
+///   - `originalTitle`: The original title in the original language.
+///   - `originalLanguage`: The language code of the original movie.
+///   - `overview`: A summary of the movie.
+///   - `releaseDate`: The date the movie was released.
+///   - `genreIds`: List of genre IDs associated with the movie.
+///   - `backdropImageURL`/`posterImageURL`: URLs for movie images.
+///   - `popularity`, `voteAverage`, `voteCount`: Popularity and voting data.
+///   - `video`: Indicates if the movie has a video.
+///   - `adult`: Indicates if the movie is for adults.
 struct Movie: Identifiable, Hashable {
     let id: Int
     let title: String
