@@ -7,11 +7,13 @@
 
 import Foundation
 
-
+/// Defines the contract for API clients, such as searching for movies.
 protocol ApiClient {
     func searchMovies(category: SearchCategory) async throws -> [Movie]
 }
 
+/// Concrete implementation of `ApiClient` that performs network requests using a `NetworkSession`.
+/// Provides generic request handling and convenience wrappers for media searches.
 class APIManager: ApiClient {
     var session: NetworkSession
     
@@ -51,6 +53,7 @@ extension APIManager {
     // Add wrappers for TV shows, collections, etc.
 }
 
+/// Represents common service-level networking errors with localized descriptions.
 enum ServiceError: LocalizedError {
      case invalidURL
      case noData

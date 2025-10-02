@@ -7,11 +7,14 @@
 
 import SwiftUI
 
-/// A reusable SwiftUI search bar component with a clear button and editable text binding.
+/// A customizable search bar view for SwiftUI.
 ///
-/// `CustomSearchBar` provides a text field styled as a search bar, complete with a magnifying glass icon,
-/// a clear button that appears when the text is not empty, and support for editing state.
-/// It is designed to be easily integrated into SwiftUI views, allowing for two-way binding of the search text.
+/// `CustomSearchBar` provides a text field with a magnifying glass icon,
+/// and a clear button that appears when text is entered. It handles basic
+/// search bar interactions, such as starting editing on tap and clearing text.
+///
+/// The search bar is designed to be used with a `@Binding` string so that
+/// the parent view can read and update the search text.
 struct CustomSearchBar: View {
     @Binding var text: String
     @State private var isEditing = false

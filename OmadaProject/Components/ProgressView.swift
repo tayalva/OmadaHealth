@@ -40,4 +40,5 @@ struct ProgressView: View {
 
 #Preview {
     ProgressView(rating: 7.4)
+        .padding()
 }
