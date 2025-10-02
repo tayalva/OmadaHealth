@@ -30,6 +30,7 @@ struct MovieSearchView: View {
                             .padding(8)
                             .lineSeparator(positions: index != viewModel.results.count - 1 ? [.bottom] : [])
                             .onTapGesture {
+                                isSearchFocused = false
                                 viewModel.goToDetailView(for: movie)
                             }
                         }
