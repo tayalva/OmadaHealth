@@ -33,8 +33,11 @@ struct MovieCellView: View {
                         .padding(.top, 8)
                 }
             }
+            
+            Spacer()
         }
-        .frame(height: maxHeight)
+        .contentShape(Rectangle())
+        .frame(maxWidth: .infinity, maxHeight: maxHeight)
     }
     
     func viewerRating(_ rating: Double) -> some View {

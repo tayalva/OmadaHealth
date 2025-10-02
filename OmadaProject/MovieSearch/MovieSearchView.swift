@@ -10,11 +10,14 @@ import SwiftUI
 struct MovieSearchView: View {
     @State var viewModel: ViewModel = ViewModel()
     @State var searchText: String = ""
+    @FocusState private var isSearchFocused: Bool
     
     var body: some View {
         NavigationStack(path: $viewModel.navPath) {
             
             CustomSearchBar(text: $searchText)
+                .lineSeparator(positions: [.top, .bottom], fullWidth: true)
+                .focused($isSearchFocused)
             
                 ScrollView {
                     LazyVStack(alignment: .leading) {
@@ -25,14 +28,9 @@ struct MovieSearchView: View {
                                 imageURL: movie.posterImageURL
                             )
                             .padding(8)
+                            .lineSeparator(positions: index != viewModel.results.count - 1 ? [.bottom] : [])
                             .onTapGesture {
                                 viewModel.goToDetailView(for: movie)
-                            }
-                            
-                            if index != viewModel.results.count - 1 {
-                                Rectangle()
-                                    .frame(height: 1)
-                                    .opacity(0.2)
                             }
                         }
                     }
@@ -42,8 +40,10 @@ struct MovieSearchView: View {
                 .navigationDestination(for: Movie.self) { movie in
                     MovieDetailView(movie: movie)
                 }
+                .onTapGesture {
+                    isSearchFocused = false
+                }
             }
-          
         .onChange(of: searchText) {
             Task {
                 await viewModel.search(query: searchText)
@@ -86,41 +86,42 @@ extension MovieSearchView {
     }
 }
 
-import SwiftUI
-
 struct CustomSearchBar: View {
     @Binding var text: String
     @State private var isEditing = false
 
     var body: some View {
-        HStack {
-            TextField("Search", text: $text)
-                .padding(8)
-                .padding(.horizontal, 25)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 8)
+        VStack {
+            HStack {
+                TextField("Search", text: $text)
+                    .padding(8)
+                    .padding(.horizontal, 30)
+                    .background(.gray.opacity(0.1))
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 8)
 
-                        if isEditing && !text.isEmpty {
-                            Button(action: {
-                                self.text = ""
-                            }) {
-                                Image(systemName: "multiply.circle.fill")
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 8)
+                            if !text.isEmpty {
+                                Button(action: {
+                                    text = ""
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.gray)
+                                        .padding(.trailing, 8)
+                                }
                             }
                         }
+                    )
+                    .onTapGesture {
+                        isEditing = true
                     }
-                )
-                .onTapGesture {
-                    self.isEditing = true
-                }
+            }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
+        .contentShape(Rectangle())
     }
 }

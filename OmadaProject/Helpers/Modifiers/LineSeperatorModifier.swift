@@ -14,6 +14,7 @@ struct LineSeparator: ViewModifier {
     }
     
     var positions: [Positions] = [.top, .bottom]
+    var fullWidth = false
     
     func body(content: Content) -> some View {
         VStack {
@@ -35,12 +36,12 @@ struct LineSeparator: ViewModifier {
         Rectangle()
             .frame(height: 1)
             .opacity(0.2)
-            .padding(.leading)
+            .padding(.leading, fullWidth ? 0 : 16)
     }
 }
 
 extension View {
-    func lineSeparator(positions: [LineSeparator.Positions]) -> some View {
-        self.modifier(LineSeparator(positions: positions))
+    func lineSeparator(positions: [LineSeparator.Positions], fullWidth: Bool = false) -> some View {
+        self.modifier(LineSeparator(positions: positions, fullWidth: fullWidth))
     }
 }
