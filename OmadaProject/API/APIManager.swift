@@ -8,11 +8,11 @@
 import Foundation
 
 
-protocol APIManagerProtocol {
-    
+protocol ApiClient {
+    func searchMovies(category: SearchCategory) async throws -> [Movie]
 }
 
-class APIManager: APIManagerProtocol {
+class APIManager: ApiClient {
     var session: NetworkSession
     
     init(session: NetworkSession = URLSession.shared) {
@@ -42,7 +42,6 @@ extension APIManager {
 }
 
 extension APIManager {
-    
     // MARK: - Convenience Wrappers
     func searchMovies(category: SearchCategory) async throws -> [Movie] {
         let response: MoviesResponse = try await search(category: category)

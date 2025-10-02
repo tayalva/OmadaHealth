@@ -11,9 +11,13 @@ import SwiftUI
 extension MovieSearchView {
     @Observable
     class ViewModel {
-        var service = APIManager()
+        var service: ApiClient
         var results: [Movie] = []
         var navPath = NavigationPath()
+        
+        init(service: APIManager = APIManager()) {
+            self.service = service
+        }
         
         func search(query: String) async {
             do {
