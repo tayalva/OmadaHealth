@@ -5,6 +5,7 @@
 //  Created by Taylor Smith on 10/1/25.
 //
 
+import os
 import Foundation
 import SwiftUI
 
@@ -23,7 +24,7 @@ extension MovieSearchView {
             do {
                 results = try await service.searchMovies(category: .movie(query: query, page: 1))
             } catch {
-                print(error)
+                Logger().error("Search failed: \(error)")
             }
         }
         

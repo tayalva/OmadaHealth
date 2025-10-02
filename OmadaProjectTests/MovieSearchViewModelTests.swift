@@ -7,6 +7,7 @@
 
 import Foundation
 import Testing
+import SwiftUI
 @testable import OmadaProject
 
 @MainActor
@@ -23,5 +24,13 @@ struct MovieSearchViewModelTests {
         await viewModel.search(query: "John Wick")
         
         #expect(viewModel.results.count == 2)
+    }
+    
+    @Test
+    func goToDetail() async throws {
+        let viewModel = MovieSearchView.ViewModel()
+        
+        viewModel.goToDetailView(for: Movie())
+        #expect(viewModel.navPath.count == 1)
     }
 }
