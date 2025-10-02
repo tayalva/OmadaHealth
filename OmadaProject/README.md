@@ -33,7 +33,14 @@ This project demonstrates:
   - Viewer rating with visual representation
 - Lower section:
   - Movie overview and additional details
+                                                    
+## Extras
 
+- Added a few small units tests for APIManager and MovieSearch.ViewModel
+- Added documentation for each file
+- Used KingFisher for image loading and caching. I wrapped this in ImageFetcher to allow for easier changes away from KingFisher if needed, without affecting the rest of the code.
+                                                    
+                                                    
 ## Installation
 
 1. Clone the repository:

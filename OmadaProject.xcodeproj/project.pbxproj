@@ -44,11 +44,6 @@
 			path = OmadaProjectTests;
 			sourceTree = "<group>";
 		};
-		A15B664F2E8C2EA700696DE5 /* OmadaProjectUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OmadaProjectUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +77,6 @@
 			children = (
 				A15B66372E8C2EA600696DE5 /* OmadaProject */,
 				A15B66452E8C2EA700696DE5 /* OmadaProjectTests */,
-				A15B664F2E8C2EA700696DE5 /* OmadaProjectUITests */,
 				A15B66DE2E8D78AA00696DE5 /* Frameworks */,
 				A15B66362E8C2EA600696DE5 /* Products */,
 			);
@@ -166,9 +160,6 @@
 			);
 			dependencies = (
 				A15B664E2E8C2EA700696DE5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				A15B664F2E8C2EA700696DE5 /* OmadaProjectUITests */,
 			);
 			name = OmadaProjectUITests;
 			packageProductDependencies = (
