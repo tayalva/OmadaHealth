@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct OmadaProjectApp: App {
@@ -18,6 +19,7 @@ struct OmadaProjectApp: App {
         WindowGroup {
             MovieSearchView()
         }
+        .modelContainer(for: Movie.self)
     }
     
     /// This is a network monitor setup. Similar to Charles or ProxyMan
