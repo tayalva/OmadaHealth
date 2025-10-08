@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftData
 
 /// The main app movie object representing a movie in the OmadaProject.
 ///
@@ -26,22 +25,21 @@ import SwiftData
 ///   - `popularity`, `voteAverage`, `voteCount`: Popularity and voting data.
 ///   - `video`: Indicates if the movie has a video.
 ///   - `adult`: Indicates if the movie is for adults.
-@Model
-class Movie: Identifiable, Hashable {
-    var id: Int
-    var title: String
-    var originalTitle: String
-    var originalLanguage: String
-    var overview: String
-    var releaseDate: Date?
-    var genreIds: [Int]
+struct Movie: Identifiable, Hashable {
+    let id: Int
+    let title: String
+    let originalTitle: String
+    let originalLanguage: String
+    let overview: String
+    let releaseDate: Date?
+    let genreIds: [Int]
     var backdropImageURL: URL?
     var posterImageURL: URL?
-    var popularity: Double
-    var voteAverage: Double
-    var voteCount: Int
-    var video: Bool
-    var adult: Bool
+    let popularity: Double
+    let voteAverage: Double
+    let voteCount: Int
+    let video: Bool
+    let adult: Bool
     
     init(
         id: Int = 0,
